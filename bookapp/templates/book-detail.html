@@ -1,0 +1,42 @@
+{%extends 'base.html'%}
+{%block body_block%}
+
+<div class="container">
+<!--    <div class="row">-->
+<!--        <div class="col-4"></div>-->
+<!--        <div class="col-4">-->
+<!--            <div>-->
+<!--                {{book.book_name}}-->
+<!--                {{book.author_name}}-->
+<!--                {{book.price}}-->
+<!--                {{book.publisher}}-->
+
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="col-4"></div>-->
+<!--    </div>-->
+
+
+    <div class="row mt-5 text-center">
+        <div class="col-3"></div>
+        <div class="col-6 border" style="background-color: #e6f2ff">
+            <h3 class="mt-5" style="color:#112066">Details of Book</h3>
+            <table class="table mt-5">
+                <tr>
+                    <th>Book Name</th>
+                    <th>Author Name</th>
+                    <th>Price</th>
+                    <th>Publisher</th>
+                </tr>
+                <tr>
+                    <td>{{book.book_name}}</td>
+                    <td>{{book.author_name}}</td>
+                    <td>{{book.price}}</td>
+                    <td>{{book.publisher}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-3"></div>
+    </div>
+</div>
+{%endblock%}
