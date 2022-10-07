@@ -41,11 +41,12 @@
                 {%csrf_token%}
                 {{form.as_p}}
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-info">Login</button>
+                    <button type="submit" class="btn btn-info mt-3">Login</button>
                 </div>
             </form>
         </div>
         <div class="col-3"></div>
+        <a class="mt-5 text-center" style="color:#112066" href="{%url 'register'%}">Create New Account</a>
     </div>
 </div>
 </body>

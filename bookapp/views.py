@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from bookapp.models import Books
 from django.contrib import messages
+from bookapp.decorators import signin_required
+from django.utils.decorators import method_decorator
 
 
 # Create your views here.
@@ -52,6 +54,7 @@ class LoginView(View):
 
         return render(request,"login.html")
 
+@method_decorator(signin_required,name="dispatch")
 
 class IndexView(View):
 
@@ -64,6 +67,8 @@ class SignOutView(View):
         logout(request)
         return redirect("signin")
 
+
+@method_decorator(signin_required,name="dispatch")
 
 class BookAddView(View):
 
@@ -83,13 +88,15 @@ class BookAddView(View):
             return render(request,"add-book.html",{"form": form})
 
 
+@method_decorator(signin_required,name="dispatch")
+
 class BookListView(View):
 
     def get(self,request,*args,**kwargs):
         all_books=Books.objects.all()
         return render(request,"booklist.html",{"books":all_books})
 
-
+@signin_required
 #localhost:8000/books/remove/id
 def delete_book(request,*args,**kwargs):
     id=kwargs.get("id")
@@ -98,6 +105,8 @@ def delete_book(request,*args,**kwargs):
     return redirect("books-list")
 
 
+@method_decorator(signin_required,name="dispatch")
+
 class BookDetailsView(View):
 
     def get(self,request,*args,**kwargs):
@@ -105,6 +114,7 @@ class BookDetailsView(View):
         book=Books.objects.get(id=id)
         return render(request,"book-detail.html",{"book":book})
 
+@method_decorator(signin_required,name="dispatch")
 
 class BookEditView(View):
 
@@ -121,9 +131,9 @@ class BookEditView(View):
 
         if form.is_valid():
             form.save()
-            # messages.success(request,"book hasbeen changed")
+            messages.success(request,"book hasbeen changed")
             return redirect("books-list")
         else:
-            # messages.error(request,"book update failed")
+            messages.error(request,"book update failed")
             return render(request,"book-edit.html",{"form":form})
 
